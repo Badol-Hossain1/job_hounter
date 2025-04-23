@@ -1,16 +1,25 @@
 import Lottie from 'lottie-react'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router'
 import registerLogo from '../../../public/Animation - 1745422694010.json'
+import { AuthContext } from '../../context/AuthContext'
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext)
     const handleResister = (event) => {
         event.preventDefault()
-        const from =new FormData(event.target)
+        const from = new FormData(event.target)
         const email = from.get('email')
         console.log('🚀 ~ handleResister ~ email:', email)
         const password = from.get('password')
         console.log('🚀 ~ handleResister ~ password:', password)
+        createUser(email, password)
+            .then((result) => {
+                console.log(result)
+            })
+            .then((error) => {
+                console.log(error)
+            })
     }
     return (
         <div>
